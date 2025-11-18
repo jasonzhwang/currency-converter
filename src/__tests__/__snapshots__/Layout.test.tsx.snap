@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout Component matches snapshot 1`] = `
+<div>
+  <header
+    class="header"
+  >
+    <h1
+      class="headerTitle"
+    >
+      Convert
+    </h1>
+  </header>
+  <main>
+    <div>
+      Test Content
+    </div>
+  </main>
+</div>
+`;

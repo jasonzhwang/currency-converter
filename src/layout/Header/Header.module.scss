@@ -1,0 +1,14 @@
+.header {
+  border-bottom: 1px solid var(--border-gray);
+  padding: 1.5rem;
+  background-color: var(--bg-white);
+}
+
+.headerTitle {
+  max-width: 28rem;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}

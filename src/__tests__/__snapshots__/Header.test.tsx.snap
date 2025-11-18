@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Component matches snapshot 1`] = `
+<header
+  class="header"
+>
+  <h1
+    class="headerTitle"
+  >
+    Convert
+  </h1>
+</header>
+`;

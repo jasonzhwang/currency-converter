@@ -1,0 +1,260 @@
+@import "../styles/variables.scss";
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-2xl;
+  background-color: $color-bg-white;
+}
+
+.header {
+  margin-bottom: $spacing-2xl + $spacing-lg;
+  border-bottom: 2px solid $color-border-gray;
+  padding-bottom: $spacing-2xl;
+
+  h1 {
+    font-size: $font-size-3xl;
+    color: $color-text-dark;
+    margin: 0 0 $spacing-sm;
+  }
+
+  p {
+    font-size: $font-size-lg;
+    color: $color-text-gray;
+    margin: 0;
+  }
+}
+
+.section {
+  margin-bottom: $spacing-2xl + $spacing-2xl;
+
+  h2 {
+    font-size: $font-size-2xl;
+    color: $color-text-dark;
+    margin-bottom: $spacing-2xl;
+    padding-bottom: $spacing-lg;
+    border-bottom: 1px solid $color-border-gray;
+  }
+}
+
+.subsection {
+  margin-bottom: $spacing-2xl;
+
+  h3 {
+    font-size: $font-size-xl;
+    color: $color-text-dark;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+/* Colors */
+.colorGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: $spacing-2xl;
+}
+
+.colorCategory {
+  h3 {
+    font-size: $font-size-base;
+    color: $color-text-dark;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.colorList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.colorCard {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+  padding: $spacing-md;
+  background-color: $color-bg-lighter;
+  border-radius: $radius-md;
+}
+
+.colorBox {
+  width: 60px;
+  height: 60px;
+  border-radius: $radius-md;
+  border: 1px solid $color-border-gray;
+  flex-shrink: 0;
+}
+
+.colorInfo {
+  flex: 1;
+}
+
+.colorLabel {
+  font-weight: $font-weight-bold;
+  color: $color-text-dark;
+  margin-bottom: $spacing-xs;
+}
+
+.colorValue {
+  font-size: $font-size-sm;
+  color: $color-text-gray;
+  font-family: monospace;
+}
+
+/* Spacing */
+.spacingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: $spacing-2xl;
+}
+
+.spacingCard {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.spacingDemo {
+  display: flex;
+  align-items: flex-end;
+  min-height: 120px;
+  padding: $spacing-lg;
+  background-color: $color-bg-lighter;
+  border-radius: $radius-md;
+  border: 1px solid $color-border-gray;
+}
+
+.spacingBlock {
+  background: linear-gradient(135deg, $color-primary-blue, $color-primary-blue-hover);
+  border-radius: $radius-sm;
+}
+
+.spacingInfo {
+  text-align: center;
+}
+
+.spacingLabel {
+  font-weight: $font-weight-bold;
+  color: $color-text-dark;
+  margin-bottom: $spacing-xs;
+}
+
+.spacingValue {
+  font-size: $font-size-sm;
+  color: $color-text-gray;
+  font-family: monospace;
+}
+
+/* Typography */
+.typographyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: $spacing-lg;
+}
+
+.typeCard {
+  padding: $spacing-xl + $spacing-lg;
+  background-color: $color-bg-lighter;
+  border-radius: $radius-md;
+  border: 1px solid $color-border-gray;
+}
+
+.typePreview {
+  display: block;
+  margin-bottom: $spacing-lg;
+  color: $color-text-dark;
+}
+
+.typeInfo {
+  display: flex;
+  justify-content: space-between;
+  font-size: $font-size-sm;
+  color: $color-text-gray;
+
+  span {
+    font-family: monospace;
+  }
+}
+
+.weightGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: $spacing-lg;
+}
+
+.weightCard {
+  padding: $spacing-xl + $spacing-lg;
+  background-color: $color-bg-lighter;
+  border-radius: $radius-md;
+  border: 1px solid $color-border-gray;
+  text-align: center;
+}
+
+.weightPreview {
+  font-size: $font-size-xl;
+  color: $color-text-dark;
+  margin-bottom: $spacing-md;
+}
+
+.weightValue {
+  font-size: $font-size-sm;
+  color: $color-text-gray;
+  font-family: monospace;
+}
+
+/* Buttons */
+.buttonGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-lg;
+  padding: $spacing-xl + $spacing-lg;
+  background-color: $color-bg-lighter;
+  border-radius: $radius-md;
+  border: 1px solid $color-border-gray;
+}
+
+/* Cards */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-xl + $spacing-sm;
+
+  h3 {
+    margin: 0 0 $spacing-md;
+    color: $color-text-dark;
+  }
+
+  p {
+    margin: 0;
+    color: $color-text-gray;
+    font-size: 0.95rem;
+  }
+}
+
+/* Breakpoints */
+.breakpointGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: $spacing-xl + $spacing-sm;
+}
+
+.breakpointCard {
+  padding: $spacing-xl + $spacing-lg;
+  background-color: $color-bg-lighter;
+  border-radius: $radius-md;
+  border: 1px solid $color-border-gray;
+  text-align: center;
+}
+
+.breakpointLabel {
+  font-weight: $font-weight-bold;
+  color: $color-text-dark;
+  margin-bottom: $spacing-sm;
+  text-transform: capitalize;
+}
+
+.breakpointValue {
+  font-size: $font-size-sm;
+  color: $color-text-gray;
+  font-family: monospace;
+}

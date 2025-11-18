@@ -1,0 +1,60 @@
+@import "../../../styles/variables.scss";
+
+.button {
+  padding: $spacing-lg;
+  border: 1px solid $color-border-gray;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  background-color: $color-bg-lighter;
+  color: $color-text-dark;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background-color: $color-bg-white;
+    border-color: $color-primary-blue;
+  }
+
+  &:active:not(:disabled) {
+    background-color: $color-border-gray;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Variants
+  &.primary {
+    background-color: $color-primary-blue;
+    color: $color-bg-white;
+    border-color: $color-primary-blue;
+
+    &:hover:not(:disabled) {
+      background-color: $color-primary-blue-hover;
+      border-color: $color-primary-blue-hover;
+    }
+  }
+
+  &.danger {
+    background-color: $color-error-light;
+    color: $color-error;
+    border-color: $color-error;
+
+    &:hover:not(:disabled) {
+      background-color: $color-error-lighter;
+    }
+  }
+
+  // Sizes
+  &.sm {
+    padding: $spacing-sm $spacing-md;
+    font-size: 0.875rem;
+  }
+
+  &.lg {
+    padding: $spacing-xl $spacing-2xl;
+    font-size: 1.125rem;
+  }
+}

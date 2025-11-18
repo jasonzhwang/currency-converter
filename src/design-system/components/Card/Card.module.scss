@@ -1,0 +1,14 @@
+@import "../../../styles/variables.scss";
+
+.card {
+  background-color: $color-bg-white;
+  border: 1px solid $color-border-gray;
+  border-radius: 0.75rem;
+  padding: $spacing-2xl;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+}

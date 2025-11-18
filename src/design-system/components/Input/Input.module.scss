@@ -1,0 +1,39 @@
+@import "../../../styles/variables.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: $color-text-dark;
+}
+
+.input {
+  padding: $spacing-md $spacing-lg;
+  border: 1px solid $color-border-gray;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: $font-family-base;
+  color: $color-text-dark;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: $color-primary-blue;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  &.error {
+    border-color: $color-error;
+    background-color: $color-error-light;
+  }
+}
+
+.errorText {
+  font-size: 0.875rem;
+  color: $color-error;
+}

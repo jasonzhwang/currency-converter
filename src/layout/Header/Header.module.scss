@@ -1,14 +1,16 @@
+@import "../../styles/variables.scss";
+
 .header {
-  border-bottom: 1px solid var(--border-gray);
+  border-bottom: 1px solid $color-border-gray;
   padding: 1.5rem;
-  background-color: var(--bg-white);
+  background-color: $color-bg-white;
 }
 
 .headerTitle {
   max-width: 28rem;
   margin: 0 auto;
   text-align: center;
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--text-dark);
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-dark;
 }

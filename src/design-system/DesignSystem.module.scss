@@ -216,7 +216,7 @@
 /* Cards */
 .cardGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: $spacing-xl + $spacing-sm;
 
   h3 {
@@ -229,6 +229,11 @@
     color: $color-text-gray;
     font-size: 0.95rem;
   }
+}
+
+/* DS-only: add inner padding to Card content */
+.paddedCard {
+  padding: $spacing-xl + $spacing-lg;
 }
 
 /* Breakpoints */

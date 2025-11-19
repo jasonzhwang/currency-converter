@@ -133,17 +133,13 @@ export default function DesignSystemPage() {
       <section className={styles.section}>
         <h2>Cards</h2>
         <div className={styles.cardGrid}>
-          <Card>
-            <h3>Card Title</h3>
-            <p>This is a card component with default styling and shadow.</p>
+          <Card className={styles.paddedCard}>
+            <h3>Default Card</h3>
+            <p>Basic card with standard border and background.</p>
           </Card>
-          <Card>
-            <h3>Another Card</h3>
-            <p>Cards are useful for grouping related content and actions.</p>
-          </Card>
-          <Card>
-            <h3>More Cards</h3>
-            <p>You can use cards throughout your application for consistency.</p>
+          <Card interactive className={styles.paddedCard}>
+            <h3>Interactive Card</h3>
+            <p>Hover to see the border turn blue.</p>
           </Card>
         </div>
       </section>

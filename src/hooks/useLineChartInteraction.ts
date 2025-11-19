@@ -31,10 +31,16 @@ export function useLineChartInteraction({
     }
     const minRate = Math.min(...data.map((d) => d.rate));
     const maxRate = Math.max(...data.map((d) => d.rate));
-    const range = maxRate - minRate || 1;
+
+    // Use fixed tick interval (0.01) to match LineChart.tsx calculation
+    const tickInterval = 0.01;
+    const fixedMin = Math.floor(minRate / tickInterval) * tickInterval;
+    const fixedMax = Math.ceil(maxRate / tickInterval) * tickInterval;
+    const fixedRange = fixedMax - fixedMin;
+
     pointsCacheRef.current = data.map((d, i) => {
       const x = CHART_MARGIN_LEFT + (i / (data.length - 1)) * PLOT_WIDTH;
-      const y = CHART_MARGIN_TOP + PLOT_HEIGHT - ((d.rate - minRate) / range) * PLOT_HEIGHT;
+      const y = CHART_MARGIN_TOP + PLOT_HEIGHT - ((d.rate - fixedMin) / fixedRange) * PLOT_HEIGHT;
       return { ...d, x, y };
     });
   }, [data, PLOT_WIDTH, PLOT_HEIGHT]);

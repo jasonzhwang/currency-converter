@@ -30,12 +30,19 @@ const LineChart: React.FC<LineChartProps> = ({ data, onHover, onZoom }) => {
   const maxRate = Math.max(...data.map((d) => d.rate));
   const range = maxRate - minRate || 1;
 
+  // Calculate fixed tick interval (e.g., 0.01 for currency rates)
+  const tickInterval = 0.01;
+  const fixedMin = Math.floor(minRate / tickInterval) * tickInterval;
+  const fixedMax = Math.ceil(maxRate / tickInterval) * tickInterval;
+  const fixedRange = fixedMax - fixedMin;
+
   const PLOT_WIDTH = VIEWBOX_WIDTH - CHART_MARGIN_LEFT - CHART_MARGIN_RIGHT;
   const PLOT_HEIGHT = VIEWBOX_HEIGHT - CHART_MARGIN_TOP - CHART_MARGIN_BOTTOM;
 
   const points = data.map((d, i) => {
     const x = CHART_MARGIN_LEFT + (i / (data.length - 1)) * PLOT_WIDTH;
-    const y = CHART_MARGIN_TOP + PLOT_HEIGHT - ((d.rate - minRate) / range) * PLOT_HEIGHT;
+    // Use fixed min/max for consistent scaling
+    const y = CHART_MARGIN_TOP + PLOT_HEIGHT - ((d.rate - fixedMin) / fixedRange) * PLOT_HEIGHT;
     return { x, y, ...d };
   });
 
@@ -82,10 +89,12 @@ const LineChart: React.FC<LineChartProps> = ({ data, onHover, onZoom }) => {
         />
 
         {/* Y ticks and grid */}
-        {Array.from({ length: 5 }).map((_, idx) => {
-          const t = idx / 4;
+        {Array.from({
+          length: Math.ceil((fixedMax - fixedMin) / tickInterval) + 1,
+        }).map((_, idx) => {
+          const val = fixedMin + idx * tickInterval;
+          const t = (val - fixedMin) / fixedRange;
           const y = CHART_MARGIN_TOP + (1 - t) * PLOT_HEIGHT;
-          const val = minRate + t * range;
           return (
             <g key={`ytick-${idx}`}>
               <line

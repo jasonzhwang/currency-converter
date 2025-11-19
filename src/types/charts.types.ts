@@ -3,15 +3,6 @@ export interface HistoricalPoint {
   rate: number;
 }
 
-export interface ChartModalProps {
-  isOpen: boolean;
-  baseCurrency: string;
-  targetCurrency: string;
-  chartData: HistoricalPoint[];
-  isLoading: boolean;
-  onClose: () => void;
-}
-
 export interface LineChartProps {
   data: HistoricalPoint[];
   currency: string;

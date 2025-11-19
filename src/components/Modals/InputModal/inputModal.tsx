@@ -1,13 +1,5 @@
 import styles from "./InputModal.module.scss";
-
-interface InputModalProps {
-  isOpen: boolean;
-  currency: string;
-  inputValue: string;
-  onInputChange: (value: string) => void;
-  onConfirm: () => void;
-  onCancel?: () => void;
-}
+import { InputModalProps } from "@/types/modals.types";
 
 export default function InputModal({
   isOpen,

@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import LineChart from "../../Chart/LineChart";
 import styles from "./ChartModal.module.scss";
-import { ChartModalProps, HistoricalPoint } from "@/types/charts.types";
+import { HistoricalPoint } from "@/types/charts.types";
+import { ChartModalProps } from "@/types/modals.types";
 
 export default function ChartModal({
   isOpen,

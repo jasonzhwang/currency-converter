@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import styles from "../Modals/ChartModal/ChartModal.module.scss";
+import styles from "./LineChart.module.scss";
 import { LineChartProps } from "@/types/charts.types";
 import {
   VIEWBOX_HEIGHT,

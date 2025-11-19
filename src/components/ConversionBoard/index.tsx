@@ -10,7 +10,7 @@ import {
 import { fetchExchangeRates } from "@/services/exchangeRate";
 import { formatConversions } from "@/utils/conversionHelper";
 import { Conversion, ConversionBoardProps } from "@/types/conversion.types";
-import InputModal from "@/components/Modals/inputModal";
+import InputModal from "@/components/Modals/InputModal/inputModal";
 import ChartModal from "@/components/Modals/ChartModal";
 import { getMockHistoricalData } from "@/data/mockHistoricalStats";
 import { useModal } from "@/hooks/useModal";

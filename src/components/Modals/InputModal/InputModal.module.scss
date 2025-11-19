@@ -16,23 +16,33 @@
   border-radius: $radius-md;
   width: 100%;
   max-width: 360px;
-  padding: $spacing-lg;
+  padding: $spacing-3xl $spacing-lg;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
 
 .modalTitle {
-  margin: 0 0 $spacing-md;
+  margin: 0 0 $spacing-lg;
+  padding: 0 0 $spacing-sm;
   font-size: $font-size-lg;
   font-weight: $font-weight-semibold;
 }
 
 .modalInput {
   width: 100%;
-  padding: $spacing-md $spacing-lg;
+  padding: $spacing-lg $spacing-lg;
   border: 1px solid $color-border-gray;
   border-radius: $radius-md;
   font-size: $font-size-base;
   margin-bottom: $spacing-md;
+}
+
+.errorMessage {
+  color: $color-error;
+  font-size: $font-size-sm;
+  margin-bottom: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  background: $color-error-light;
+  border-radius: $radius-md;
 }
 
 .numberPad {
@@ -40,6 +50,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: $spacing-sm;
   margin-bottom: $spacing-md;
+  padding: $spacing-lg 0;
 }
 
 .numberBtn,
@@ -79,6 +90,14 @@
   background: $color-primary-blue;
   color: $color-bg-white;
   border-color: $color-primary-blue;
+
+  &:disabled {
+    background: $color-border-gray;
+    color: $color-text-gray;
+    border-color: $color-border-gray;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
 }
 
 .clearBtn {

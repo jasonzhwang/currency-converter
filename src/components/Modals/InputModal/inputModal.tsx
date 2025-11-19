@@ -1,5 +1,7 @@
 import styles from "./InputModal.module.scss";
 import { InputModalProps } from "@/types/modals.types";
+import { useInputValidation } from "@/hooks/useInputValidation";
+import { DECIMAL_PLACES } from "@/data/constants";
 
 export default function InputModal({
   isOpen,
@@ -9,10 +11,15 @@ export default function InputModal({
   onConfirm,
   onCancel,
 }: InputModalProps) {
+  const { isValid, shouldShowError } = useInputValidation(inputValue);
+
   if (!isOpen) return null;
 
   const handleNumberClick = (num: number) => {
-    onInputChange(inputValue + num.toString());
+    const newValue = inputValue + num.toString();
+    // Limit decimal places to the defined constant
+    const limitedValue = limitDecimalPlaces(newValue, DECIMAL_PLACES);
+    onInputChange(limitedValue);
   };
 
   const handleDelete = () => {
@@ -29,6 +36,18 @@ export default function InputModal({
     }
   };
 
+  // Limit input to specified decimal places
+  const limitDecimalPlaces = (value: string, decimalPlaces: number): string => {
+    if (!value.includes(".")) {
+      return value;
+    }
+    const [integerPart, decimalPart] = value.split(".");
+    if (decimalPart.length > decimalPlaces) {
+      return integerPart + "." + decimalPart.slice(0, decimalPlaces);
+    }
+    return value;
+  };
+
   return (
     <div className={styles.modalOverlay} onClick={onCancel || onConfirm}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
@@ -41,6 +60,9 @@ export default function InputModal({
           placeholder="0.00"
           autoFocus
         />
+        {shouldShowError && (
+          <div className={styles.errorMessage}>Please enter a valid positive number</div>
+        )}
 
         {/* Number Pad */}
         <div className={styles.numberPad}>
@@ -64,7 +86,7 @@ export default function InputModal({
           <button onClick={handleClear} className={styles.clearBtn}>
             Clear
           </button>
-          <button onClick={onConfirm} className={styles.confirmBtn}>
+          <button onClick={onConfirm} className={styles.confirmBtn} disabled={!isValid}>
             Confirm
           </button>
         </div>

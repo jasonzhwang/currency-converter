@@ -293,13 +293,16 @@ This project is open source and available under the [MIT License](LICENSE).
 
 <!-- Replace with actual screenshots -->
 
-![currency_list](./public/references/currency_list.png)
-![switch_currency](./public/references/switch_currency.png)
-![number_input](./public/references/num_pad.png)
-![input_validation](./public/references/input_validation.png)
-![scrolling_chart1](./public/references/scrolling_chart1.png)
-![scrolling_chart2](./public/references/scrolling_chart2.png)
-<img src="./public/references/design_system.png" alt="Design System" width="60%" />
+![currency_list](./public/references/currency_list.png "Currency List - View available currencies")
+![switch_currency](./public/references/switch_currency.png "Switch Currency - Select target currency")
+![number_input](./public/references/num_pad.png "Number Input - Enter conversion amount")
+![input_validation](./public/references/input_validation.png "Input Validation - Real-time validation feedback")
+![scrolling_chart1](./public/references/scrolling_chart1.png "Historical Chart - 14-day exchange rate trends")
+![scrolling_chart2](./public/references/scrolling_chart2.png "Chart Details - Interactive rate visualization")
+![design_system_part1](./public/references/design_system_part1.png "Design System Part 1 - Color palette")
+![design_system_part2](./public/references/design_system_part2.png "Design System Part 2 - Typography")
+![design_system_part3](./public/references/design_system_part3.png "Design System Part 3 - Components")
+![design_system_part4](./public/references/design_system_part4.png "Design System Part 4 - Spacing & Tokens")
 
 ---
 

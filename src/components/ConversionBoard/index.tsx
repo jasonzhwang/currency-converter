@@ -95,25 +95,27 @@ export default function ConversionBoard({
         {loading ? (
           <div>Loading...</div>
         ) : (
-          Object.entries(conversions).map(([country, conversion]) => (
-            <CurrencyCard
-              key={country}
-              country={country}
-              baseCurrency={isBaseCurrency}
-              conversion={conversion}
-              isBase={false}
-              onEditAmount={() => {
-                setEditing({ mode: "target", country });
-                const prefill = conversion?.value != null ? String(conversion.value) : String("");
-                amountModal.open(prefill);
-              }}
-              onViewChart={() => {
-                setChartTarget(country);
-                setChartOpen(true);
-              }}
-              formatCurrency={formatCurrency}
-            />
-          ))
+          Object.entries(conversions)
+            .sort(([countryA], [countryB]) => countryA.localeCompare(countryB))
+            .map(([country, conversion]) => (
+              <CurrencyCard
+                key={country}
+                country={country}
+                baseCurrency={isBaseCurrency}
+                conversion={conversion}
+                isBase={false}
+                onEditAmount={() => {
+                  setEditing({ mode: "target", country });
+                  const prefill = conversion?.value != null ? String(conversion.value) : String("");
+                  amountModal.open(prefill);
+                }}
+                onViewChart={() => {
+                  setChartTarget(country);
+                  setChartOpen(true);
+                }}
+                formatCurrency={formatCurrency}
+              />
+            ))
         )}
       </div>
 

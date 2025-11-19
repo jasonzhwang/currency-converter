@@ -90,9 +90,11 @@ const LineChart: React.FC<LineChartProps> = ({ data, onHover, onZoom }) => {
 
         {/* Y ticks and grid */}
         {Array.from({
-          length: Math.ceil((fixedMax - fixedMin) / tickInterval) + 1,
+          length: Math.round((fixedMax - fixedMin) / tickInterval) + 1,
         }).map((_, idx) => {
           const val = fixedMin + idx * tickInterval;
+          // Only render ticks within the fixed range
+          if (val > fixedMax) return null;
           const t = (val - fixedMin) / fixedRange;
           const y = CHART_MARGIN_TOP + (1 - t) * PLOT_HEIGHT;
           return (

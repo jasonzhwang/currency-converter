@@ -11,6 +11,8 @@ import { fetchExchangeRates } from "@/services/exchangeRate";
 import { formatConversions } from "@/utils/conversionHelper";
 import { Conversion, ConversionBoardProps } from "@/types/conversion.types";
 import InputModal from "@/components/Modals/inputModal";
+import ChartModal from "@/components/Modals/ChartModal";
+import { getMockHistoricalData } from "@/data/mockHistoricalStats";
 import { useModal } from "@/hooks/useModal";
 
 export default function ConversionBoard({
@@ -26,6 +28,8 @@ export default function ConversionBoard({
     mode: "base" | "target";
     country: string | null;
   } | null>(null);
+  const [chartOpen, setChartOpen] = useState(false);
+  const [chartTarget, setChartTarget] = useState<string | null>(null);
 
   useEffect(() => {
     const loadExchangeRates = async () => {
@@ -99,7 +103,10 @@ export default function ConversionBoard({
                 const prefill = conversion?.value != null ? String(conversion.value) : String("");
                 amountModal.open(prefill);
               }}
-              onViewChart={() => console.log("View chart clicked")}
+              onViewChart={() => {
+                setChartTarget(country);
+                setChartOpen(true);
+              }}
               formatCurrency={formatCurrency}
             />
           ))
@@ -133,6 +140,16 @@ export default function ConversionBoard({
           amountModal.close();
           setEditing(null);
         }}
+      />
+
+      {/* Chart Modal */}
+      <ChartModal
+        isOpen={chartOpen}
+        baseCurrency={isBaseCurrency}
+        targetCurrency={chartTarget || ""}
+        chartData={chartTarget ? getMockHistoricalData(isBaseCurrency, chartTarget) : []}
+        isLoading={false}
+        onClose={() => setChartOpen(false)}
       />
     </div>
   );

@@ -20,3 +20,13 @@ export const COUNTRY_MAP = {
 } as const;
 
 export const EMPTY_VALUE = "—";
+
+// ViewBox dimensions (SVG coordinate space)
+export const VIEWBOX_WIDTH = 760;
+export const VIEWBOX_HEIGHT = 320;
+
+// Plot margins inside the viewBox (space for axes, labels, etc.)
+export const CHART_MARGIN_LEFT = 48;
+export const CHART_MARGIN_RIGHT = 16;
+export const CHART_MARGIN_TOP = 16;
+export const CHART_MARGIN_BOTTOM = 36;

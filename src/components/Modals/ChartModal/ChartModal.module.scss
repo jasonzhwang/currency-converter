@@ -1,0 +1,226 @@
+@import "../../../styles/variables.scss";
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: $color-bg-white;
+  border: 1px solid $color-border-gray;
+  border-radius: $radius-md;
+  width: 100%;
+  max-width: 840px;
+  padding: $spacing-xl;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.modalTitleContainer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+}
+
+.modalSubtitle {
+  color: $color-text-gray;
+  font-size: $font-size-sm;
+}
+
+.loading {
+  padding: $spacing-lg;
+  text-align: center;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: $spacing-lg;
+}
+
+.closeBtn {
+  padding: $spacing-md $spacing-lg;
+  border: 1px solid $color-primary-blue;
+  border-radius: $radius-md;
+  background: $color-primary-blue;
+  color: $color-bg-white;
+  cursor: pointer;
+}
+.chartContainer {
+  margin-bottom: $spacing-xl;
+  position: relative;
+}
+
+// LineChart Styles
+.lineChartContainer {
+  position: relative;
+  padding: $spacing-lg 0;
+  min-height: 380px;
+  overflow: visible;
+
+  @include mobile-only {
+    min-height: 280px;
+    padding: $spacing-md 0;
+  }
+
+  @include tablet-up {
+    min-height: 330px;
+  }
+}
+
+.chartTitleAndControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-md;
+  gap: $spacing-md;
+
+  @include mobile-only {
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+}
+
+.chartTitlePlaceholder {
+  flex: 1;
+}
+
+.zoomControls {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  background-color: $color-bg-lighter;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-md;
+
+  @include mobile-only {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.zoomBtn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid $color-border-gray;
+  background-color: $color-bg-white;
+  border-radius: $radius-sm;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all $transition-fast;
+  color: var(--primary-blue);
+
+  &:hover:not(:disabled) {
+    background-color: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: $color-text-gray;
+  }
+}
+
+.zoomLevel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $color-text-gray;
+  min-width: 30px;
+  text-align: center;
+}
+
+.resetBtn {
+  padding: 0.35rem $spacing-md;
+  border: 1px solid $color-border-gray;
+  background-color: $color-bg-white;
+  border-radius: $radius-sm;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition-fast;
+  color: var(--primary-blue);
+
+  &:hover {
+    background-color: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+  }
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+
+  @include mobile-only {
+    max-width: 100%;
+  }
+}
+
+.tickLabel {
+  font-size: 10px;
+  fill: $color-text-gray;
+}
+
+.xAxis,
+.yAxis {
+  shape-rendering: crispEdges;
+}
+
+.crosshair {
+  shape-rendering: crispEdges;
+  pointer-events: none;
+}
+
+.chartTooltip {
+  position: absolute;
+  background-color: $color-bg-white;
+  border: 1px solid $color-border-gray;
+  border-radius: $radius-md;
+  padding: $spacing-sm $spacing-md;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  white-space: nowrap;
+  pointer-events: none;
+
+  @include mobile-only {
+    font-size: 0.85rem;
+  }
+}
+
+.tooltipDate {
+  font-size: 0.75rem;
+  color: $color-text-gray;
+  margin-bottom: 0.25rem;
+}
+
+.tooltipRate {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary-blue);
+}
+
+.chartEmpty {
+  padding: $spacing-xl;
+  text-align: center;
+  color: $color-text-gray;
+  background-color: $color-bg-lighter;
+  border-radius: $radius-md;
+}

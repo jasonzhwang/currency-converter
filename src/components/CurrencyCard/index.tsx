@@ -22,7 +22,14 @@ export default function CurrencyCard({
   const flagImage = flagImageFor(country);
 
   return (
-    <div className={`${styles.currencyCard} ${isBase ? styles.base : ""}`.trim()}>
+    <div
+      className={`${styles.currencyCard} ${isBase ? styles.base : ""}`.trim()}
+      onClick={() => {
+        if (!isBase) {
+          onViewChart?.();
+        }
+      }}
+    >
       <Card interactive>
         <div className={styles.content}>
           <div className={styles.left}>

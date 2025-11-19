@@ -18,3 +18,5 @@ export const COUNTRY_MAP = {
   GBP: { name: "GB", image: "/images/uk.png" },
   NZD: { name: "NZ", image: "/images/nz.png" },
 } as const;
+
+export const EMPTY_VALUE = "—";

@@ -1,0 +1,13 @@
+@import "../../styles/variables.scss";
+
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.targetCards {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}

@@ -1,0 +1,114 @@
+@import "../../styles/variables.scss";
+
+.currencyCard {
+  margin-bottom: $spacing-md;
+
+  &.base {
+    :global(.card) {
+      border-color: $color-primary-blue;
+      border-width: 2px;
+    }
+
+    &:first-of-type {
+      margin-bottom: $spacing-xl;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-lg;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  flex: 1;
+
+  .flag {
+    flex-shrink: 0;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+
+    .code {
+      font-weight: $font-weight-semibold;
+      font-size: $font-size-sm;
+      color: $color-text-dark;
+    }
+
+    .currencySelect {
+      font-weight: $font-weight-semibold;
+      font-size: $font-size-sm;
+      color: $color-text-dark;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      padding-right: $spacing-lg;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%231f2937' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right center;
+
+      &:hover {
+        color: $color-primary-blue;
+      }
+    }
+  }
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  margin-left: $spacing-md;
+
+  .valueWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    padding-right: $spacing-md;
+    gap: $spacing-xs;
+
+    .amount {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+      color: $color-text-dark;
+    }
+
+    .rate {
+      font-size: $font-size-sm;
+      color: $color-text-gray;
+    }
+  }
+
+  .editBtn {
+    background: none;
+    border: none;
+    border-left: 1px solid $color-border-gray;
+    cursor: pointer;
+    padding: $spacing-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity $transition-fast;
+
+    @include tablet-up {
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    @include mobile-only {
+      opacity: 1;
+    }
+  }
+}

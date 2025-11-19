@@ -4,6 +4,11 @@
   --text-gray: #6b7280;
   --text-dark: #1f2937;
   --bg-white: #f9fafb;
+  --bg-lighter: #f3f4f6;
+  --line-gray: #9ca3af;
+  --chart-axis: var(--border-gray);
+  --chart-grid: var(--bg-lighter);
+  --chart-crosshair: var(--line-gray);
 }
 
 html,

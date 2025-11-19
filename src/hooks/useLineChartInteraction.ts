@@ -7,6 +7,7 @@ import {
   CHART_MARGIN_LEFT,
   CHART_MARGIN_RIGHT,
   CHART_MARGIN_TOP,
+  CHART_TICK_INTERVAL,
 } from "@/data/constants";
 import type { UseLineChartInteractionParams } from "@/types/charts.types";
 
@@ -33,7 +34,7 @@ export function useLineChartInteraction({
     const maxRate = Math.max(...data.map((d) => d.rate));
 
     // Use fixed tick interval (0.01) to match LineChart.tsx calculation
-    const tickInterval = 0.01;
+    const tickInterval = CHART_TICK_INTERVAL;
     const fixedMin = Math.floor(minRate / tickInterval) * tickInterval;
     const fixedMax = Math.ceil(maxRate / tickInterval) * tickInterval;
     const fixedRange = fixedMax - fixedMin;

@@ -8,6 +8,10 @@ import {
   CHART_MARGIN_LEFT,
   CHART_MARGIN_RIGHT,
   CHART_MARGIN_TOP,
+  CHART_COLORS,
+  CHART_MESSAGES,
+  TOOLTIP_OFFSET_Y,
+  CHART_TICK_INTERVAL,
 } from "@/data/constants";
 import { useLineChartInteraction } from "@/hooks/useLineChartInteraction";
 
@@ -23,7 +27,7 @@ const LineChart: React.FC<LineChartProps> = ({ data, onHover, onZoom }) => {
   });
 
   if (!data || data.length === 0) {
-    return <div className={styles.chartEmpty}>No data</div>;
+    return <div className={styles.chartEmpty}>{CHART_MESSAGES.NO_CHART_DATA}</div>;
   }
 
   const minRate = Math.min(...data.map((d) => d.rate));
@@ -31,7 +35,7 @@ const LineChart: React.FC<LineChartProps> = ({ data, onHover, onZoom }) => {
   const range = maxRate - minRate || 1;
 
   // Calculate fixed tick interval (e.g., 0.01 for currency rates)
-  const tickInterval = 0.01;
+  const tickInterval = CHART_TICK_INTERVAL;
   const fixedMin = Math.floor(minRate / tickInterval) * tickInterval;
   const fixedMax = Math.ceil(maxRate / tickInterval) * tickInterval;
   const fixedRange = fixedMax - fixedMin;
@@ -63,8 +67,8 @@ const LineChart: React.FC<LineChartProps> = ({ data, onHover, onZoom }) => {
       >
         <defs>
           <linearGradient id="lineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="rgba(59, 130, 246, 0.3)" />
-            <stop offset="100%" stopColor="rgba(59, 130, 246, 0)" />
+            <stop offset="0%" stopColor={CHART_COLORS.GRADIENT_START} />
+            <stop offset="100%" stopColor={CHART_COLORS.GRADIENT_END} />
           </linearGradient>
         </defs>
 
@@ -75,7 +79,7 @@ const LineChart: React.FC<LineChartProps> = ({ data, onHover, onZoom }) => {
           y1={CHART_MARGIN_TOP}
           x2={CHART_MARGIN_LEFT}
           y2={VIEWBOX_HEIGHT - CHART_MARGIN_BOTTOM}
-          stroke="#e5e7eb"
+          stroke={CHART_COLORS.AXIS}
           strokeWidth={1}
         />
         <line
@@ -84,7 +88,7 @@ const LineChart: React.FC<LineChartProps> = ({ data, onHover, onZoom }) => {
           y1={VIEWBOX_HEIGHT - CHART_MARGIN_BOTTOM}
           x2={VIEWBOX_WIDTH - CHART_MARGIN_RIGHT}
           y2={VIEWBOX_HEIGHT - CHART_MARGIN_BOTTOM}
-          stroke="#e5e7eb"
+          stroke={CHART_COLORS.AXIS}
           strokeWidth={1}
         />
 
@@ -104,7 +108,7 @@ const LineChart: React.FC<LineChartProps> = ({ data, onHover, onZoom }) => {
                 x2={VIEWBOX_WIDTH - CHART_MARGIN_RIGHT}
                 y1={y}
                 y2={y}
-                stroke="#f3f4f6"
+                stroke={CHART_COLORS.GRID}
               />
               <text
                 x={CHART_MARGIN_LEFT - 8}
@@ -153,7 +157,7 @@ const LineChart: React.FC<LineChartProps> = ({ data, onHover, onZoom }) => {
               x2={hover.vx}
               y1={CHART_MARGIN_TOP}
               y2={VIEWBOX_HEIGHT - CHART_MARGIN_BOTTOM}
-              stroke="#9ca3af"
+              stroke={CHART_COLORS.CROSSHAIR}
               strokeDasharray="3 3"
             />
             <circle cx={hover.vx} cy={hover.vy} r={4} fill="var(--primary-blue)" />
@@ -173,7 +177,7 @@ const LineChart: React.FC<LineChartProps> = ({ data, onHover, onZoom }) => {
               className={styles.chartTooltip}
               style={{
                 left: `${tooltipX}px`,
-                top: `${hover.domY - 28}px`,
+                top: `${hover.domY - TOOLTIP_OFFSET_Y}px`,
                 transform: "translateX(-50%)",
               }}
             >

@@ -3,6 +3,12 @@ import LineChart from "../../Chart/LineChart";
 import styles from "./ChartModal.module.scss";
 import { HistoricalPoint } from "@/types/charts.types";
 import { ChartModalProps } from "@/types/modals.types";
+import {
+  CHART_MIN_WINDOW_DAYS,
+  CHART_DEFAULT_WINDOW_DAYS,
+  CHART_ZOOM_STEP_DAYS,
+  CHART_MESSAGES,
+} from "@/data/constants";
 
 export default function ChartModal({
   isOpen,
@@ -12,7 +18,9 @@ export default function ChartModal({
   isLoading,
   onClose,
 }: ChartModalProps) {
-  const [windowSize, setWindowSize] = useState(Math.min(14, chartData.length || 14));
+  const [windowSize, setWindowSize] = useState(
+    Math.min(CHART_DEFAULT_WINDOW_DAYS, chartData.length || CHART_DEFAULT_WINDOW_DAYS)
+  );
 
   const visibleData = useMemo(() => {
     if (!chartData || chartData.length === 0) return [] as HistoricalPoint[];
@@ -36,22 +44,32 @@ export default function ChartModal({
           <div className={styles.zoomControls}>
             <button
               className={styles.zoomBtn}
-              onClick={() => setWindowSize((w) => Math.max(5, w - 2))}
-              disabled={visibleData.length <= 5}
+              onClick={() =>
+                setWindowSize((w) => Math.max(CHART_MIN_WINDOW_DAYS, w - CHART_ZOOM_STEP_DAYS))
+              }
+              disabled={visibleData.length <= CHART_MIN_WINDOW_DAYS}
             >
               -
             </button>
             <span className={styles.zoomLevel}>{visibleData.length}d</span>
             <button
               className={styles.zoomBtn}
-              onClick={() => setWindowSize((w) => Math.min(chartData.length || 14, w + 2))}
-              disabled={visibleData.length >= (chartData.length || 14)}
+              onClick={() =>
+                setWindowSize((w) =>
+                  Math.min(chartData.length || CHART_DEFAULT_WINDOW_DAYS, w + CHART_ZOOM_STEP_DAYS)
+                )
+              }
+              disabled={visibleData.length >= (chartData.length || CHART_DEFAULT_WINDOW_DAYS)}
             >
               +
             </button>
             <button
               className={styles.resetBtn}
-              onClick={() => setWindowSize(Math.min(14, chartData.length || 14))}
+              onClick={() =>
+                setWindowSize(
+                  Math.min(CHART_DEFAULT_WINDOW_DAYS, chartData.length || CHART_DEFAULT_WINDOW_DAYS)
+                )
+              }
             >
               Reset
             </button>
@@ -59,7 +77,7 @@ export default function ChartModal({
         </div>
 
         {isLoading ? (
-          <div className={styles.loading}>Loading chart data...</div>
+          <div className={styles.loading}>{CHART_MESSAGES.LOADING}</div>
         ) : chartData.length > 0 ? (
           <div className={styles.chartContainer}>
             <LineChart
@@ -67,17 +85,16 @@ export default function ChartModal({
               currency={targetCurrency}
               baseCurrency={baseCurrency}
               onZoom={(dir) => {
-                const maxWindow = chartData.length || 14;
-                const step = 2;
+                const maxWindow = chartData.length || CHART_DEFAULT_WINDOW_DAYS;
                 setWindowSize((w) => {
-                  const next = dir === "in" ? w - step : w + step;
-                  return Math.max(5, Math.min(maxWindow, next));
+                  const next = dir === "in" ? w - CHART_ZOOM_STEP_DAYS : w + CHART_ZOOM_STEP_DAYS;
+                  return Math.max(CHART_MIN_WINDOW_DAYS, Math.min(maxWindow, next));
                 });
               }}
             />
           </div>
         ) : (
-          <div className={styles.chartEmpty}>No chart data available</div>
+          <div className={styles.chartEmpty}>{CHART_MESSAGES.NO_DATA}</div>
         )}
 
         <div className={styles.modalButtons}>

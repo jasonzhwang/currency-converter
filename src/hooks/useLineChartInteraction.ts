@@ -71,11 +71,19 @@ export function useLineChartInteraction({
     const vy = pL.y + t * (pR.y - pL.y);
     const rate = data[iLeft].rate + t * (data[iRight].rate - data[iLeft].rate);
     const nearestIdx = Math.round(iFloat);
-    const date = data[Math.max(0, Math.min(data.length - 1, nearestIdx))].date;
+    const nearestPoint = points[Math.max(0, Math.min(data.length - 1, nearestIdx))];
+    const date = nearestPoint.date;
 
-    const h: ChartHover = { vx, vy, domX: pxX, domY: pxY, date, rate };
+    const h: ChartHover = {
+      vx: nearestPoint.x,
+      vy: nearestPoint.y,
+      domX: pxX,
+      domY: pxY,
+      date,
+      rate,
+    };
     setHover(h);
-    onHover?.({ x: vx, y: vy, date, rate, domX: pxX, domY: pxY });
+    onHover?.({ x: nearestPoint.x, y: nearestPoint.y, date, rate, domX: pxX, domY: pxY });
   };
 
   const handleMouseLeave: React.MouseEventHandler<HTMLDivElement> = () => {
@@ -132,11 +140,19 @@ export function useLineChartInteraction({
     const vy = pL.y + t * (pR.y - pL.y);
     const rate = data[iLeft].rate + t * (data[iRight].rate - data[iLeft].rate);
     const nearestIdx = Math.round(iFloat);
-    const date = data[Math.max(0, Math.min(data.length - 1, nearestIdx))].date;
+    const nearestPoint = points[Math.max(0, Math.min(data.length - 1, nearestIdx))];
+    const date = nearestPoint.date;
 
-    const h: ChartHover = { vx, vy, domX: pxX, domY: pxY, date, rate };
+    const h: ChartHover = {
+      vx: nearestPoint.x,
+      vy: nearestPoint.y,
+      domX: pxX,
+      domY: pxY,
+      date,
+      rate,
+    };
     setHover(h);
-    onHover?.({ x: vx, y: vy, date, rate, domX: pxX, domY: pxY });
+    onHover?.({ x: nearestPoint.x, y: nearestPoint.y, date, rate, domX: pxX, domY: pxY });
   }, [data, PLOT_WIDTH, onHover]);
 
   return {

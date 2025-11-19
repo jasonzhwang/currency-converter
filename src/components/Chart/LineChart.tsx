@@ -54,6 +54,13 @@ const LineChart: React.FC<LineChartProps> = ({ data, onHover, onZoom }) => {
         viewBox={`0 0 ${VIEWBOX_WIDTH} ${VIEWBOX_HEIGHT}`}
         preserveAspectRatio="none"
       >
+        <defs>
+          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="rgba(59, 130, 246, 0.3)" />
+            <stop offset="100%" stopColor="rgba(59, 130, 246, 0)" />
+          </linearGradient>
+        </defs>
+
         {/* Axes */}
         <line
           className={styles.yAxis}
@@ -103,8 +110,6 @@ const LineChart: React.FC<LineChartProps> = ({ data, onHover, onZoom }) => {
 
         {/* X ticks */}
         {points.map((p, idx) => {
-          const every = Math.ceil(points.length / 6);
-          if (idx % every !== 0) return null;
           return (
             <text
               key={`xtick-${idx}`}
@@ -117,6 +122,14 @@ const LineChart: React.FC<LineChartProps> = ({ data, onHover, onZoom }) => {
             </text>
           );
         })}
+
+        <polygon
+          fill="url(#lineGradient)"
+          points={
+            poly +
+            ` ${VIEWBOX_WIDTH - CHART_MARGIN_RIGHT},${VIEWBOX_HEIGHT - CHART_MARGIN_BOTTOM} ${CHART_MARGIN_LEFT},${VIEWBOX_HEIGHT - CHART_MARGIN_BOTTOM}`
+          }
+        />
 
         <polyline fill="none" stroke="var(--primary-blue)" strokeWidth={2} points={poly} />
 
@@ -137,15 +150,27 @@ const LineChart: React.FC<LineChartProps> = ({ data, onHover, onZoom }) => {
         )}
       </svg>
 
-      {hover && (
-        <div
-          className={styles.chartTooltip}
-          style={{ left: `${hover.domX + 8}px`, top: `${hover.domY - 28}px` }}
-        >
-          <div className={styles.tooltipDate}>{hover.date}</div>
-          <div className={styles.tooltipRate}>{hover.rate.toFixed(4)}</div>
-        </div>
-      )}
+      {hover &&
+        containerRef.current &&
+        (() => {
+          // Calculate the correct DOM pixel position based on SVG coordinates
+          const containerWidth = containerRef.current?.offsetWidth || 0;
+          const tooltipX = containerWidth > 0 ? (hover.vx / VIEWBOX_WIDTH) * containerWidth : 0;
+
+          return (
+            <div
+              className={styles.chartTooltip}
+              style={{
+                left: `${tooltipX}px`,
+                top: `${hover.domY - 28}px`,
+                transform: "translateX(-50%)",
+              }}
+            >
+              <div className={styles.tooltipDate}>{hover.date}</div>
+              <div className={styles.tooltipRate}>{hover.rate.toFixed(4)}</div>
+            </div>
+          );
+        })()}
     </div>
   );
 };

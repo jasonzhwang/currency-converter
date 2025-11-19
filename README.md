@@ -293,8 +293,13 @@ This project is open source and available under the [MIT License](LICENSE).
 
 <!-- Replace with actual screenshots -->
 
-![Screenshot 1](./public/screenshot1.png)
-![Screenshot 2](./public/screenshot2.png)
+![currency_list](./public/references/currency_list.png)
+![switch_currency](./public/references/switch_currency.png)
+![number_input](./public/references/num_pad.png)
+![input_validation](./public/references/input_validation.png)
+![scrolling_chart1](./public/references/scrolling_chart1.png)
+![scrolling_chart2](./public/references/scrolling_chart2.png)
+![design_system](./public/references/design_system.png)
 
 ---
 

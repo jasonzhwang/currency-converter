@@ -14,6 +14,8 @@ import InputModal from "@/components/Modals/InputModal/inputModal";
 import ChartModal from "@/components/Modals/ChartModal";
 import { getMockHistoricalData } from "@/data/mockHistoricalStats";
 import { useModal } from "@/hooks/useModal";
+import { formatCurrency } from "@/utils/currencyFormatter";
+import { sanitizeAndParseNumber } from "@/utils/inputHelper";
 
 export default function ConversionBoard({
   initialBaseCurrency = DEFAULT_CURRENCY,
@@ -64,15 +66,6 @@ export default function ConversionBoard({
 
     loadExchangeRates();
   }, [isBaseCurrency, amount]);
-
-  const formatCurrency = (value: number, currency: string) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency,
-      // Use narrowSymbol to avoid prefixes like "CA$" / "A$" and show "$" instead
-      currencyDisplay: "narrowSymbol",
-    }).format(value);
-  };
 
   return (
     <div className={styles.board}>
@@ -130,9 +123,8 @@ export default function ConversionBoard({
           setEditing(null);
         }}
         onConfirm={() => {
-          const sanitized = amountModal.inputValue.replace(/[^0-9.]/g, "");
-          const next = parseFloat(sanitized);
-          if (!isNaN(next)) {
+          const next = sanitizeAndParseNumber(amountModal.inputValue);
+          if (next !== null) {
             if (editing?.mode === "target" && editing.country && conversions[editing.country]) {
               const rate = conversions[editing.country].rate;
               if (rate && rate > 0) {

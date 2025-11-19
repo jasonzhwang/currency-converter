@@ -2,6 +2,7 @@ import styles from "./InputModal.module.scss";
 import { InputModalProps } from "@/types/modals.types";
 import { useInputValidation } from "@/hooks/useInputValidation";
 import { DECIMAL_PLACES } from "@/data/constants";
+import { limitDecimalPlaces } from "@/utils/numberFormatter";
 
 export default function InputModal({
   isOpen,
@@ -34,18 +35,6 @@ export default function InputModal({
     if (!inputValue.includes(".")) {
       onInputChange(inputValue ? inputValue + "." : "0.");
     }
-  };
-
-  // Limit input to specified decimal places
-  const limitDecimalPlaces = (value: string, decimalPlaces: number): string => {
-    if (!value.includes(".")) {
-      return value;
-    }
-    const [integerPart, decimalPart] = value.split(".");
-    if (decimalPart.length > decimalPlaces) {
-      return integerPart + "." + decimalPart.slice(0, decimalPlaces);
-    }
-    return value;
   };
 
   return (

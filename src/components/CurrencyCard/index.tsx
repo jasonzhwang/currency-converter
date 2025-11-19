@@ -33,18 +33,17 @@ export default function CurrencyCard({
       <Card interactive>
         <div className={styles.content}>
           <div className={styles.left}>
-            <div className={styles.flag}>
-              {flagImage ? (
-                <img
-                  src={flagImage}
-                  alt={country}
-                  width={FLAG_IMAGE_SIZE}
-                  height={FLAG_IMAGE_SIZE}
-                />
-              ) : (
-                <span>{countryCodeFor(country)}</span>
-              )}
-            </div>
+            {flagImage ? (
+              <img
+                className={styles.flagMedia}
+                src={flagImage}
+                alt={country}
+                width={FLAG_IMAGE_SIZE}
+                height={FLAG_IMAGE_SIZE}
+              />
+            ) : (
+              <span className={styles.flagMedia}>{countryCodeFor(country)}</span>
+            )}
 
             <div className={styles.info}>
               {isBase ? (
@@ -60,7 +59,9 @@ export default function CurrencyCard({
                   ))}
                 </select>
               ) : (
-                <div className={styles.code}>{country}</div>
+                <div className={styles.code} data-testid={`currency-code-${country}`}>
+                  {country}
+                </div>
               )}
             </div>
           </div>

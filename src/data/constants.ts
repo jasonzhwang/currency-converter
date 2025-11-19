@@ -3,7 +3,7 @@ export const DEFAULT_AMOUNT = 1000;
 
 export const CURRENCIES = ["AUD", "USD", "EUR", "GBP", "CAD", "NZD"];
 
-export const FLAG_IMAGE_SIZE = 32;
+export const FLAG_IMAGE_SIZE = 20;
 export const EDIT_BUTTON_SIZE = 24;
 export const DECIMAL_PLACES = 4;
 

@@ -1,16 +1,10 @@
 @import "../../styles/variables.scss";
 
 .currencyCard {
-  margin-bottom: $spacing-md;
-
   &.base {
     :global(.card) {
       border-color: $color-primary-blue;
       border-width: 2px;
-    }
-
-    &:first-of-type {
-      margin-bottom: $spacing-xl;
     }
   }
 
@@ -26,34 +20,39 @@
 
 .content {
   display: flex;
-  align-items: stretch; // stretch children so divider can take full height
+  align-items: stretch;
   justify-content: space-between;
   gap: $spacing-lg;
+  min-height: 64px;
 }
 
 .left {
   display: flex;
   align-items: center;
-  gap: $spacing-md;
+  gap: $spacing-lg;
   flex: 1;
   padding-top: $spacing-sm;
   padding-bottom: $spacing-sm;
+  padding-left: $spacing-lg;
 
-  .flag {
+  .flagMedia {
     flex-shrink: 0;
+    display: block;
   }
 
   .info {
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     .code {
-      font-weight: $font-weight-semibold;
+      font-weight: $font-weight-normal;
       font-size: $font-size-sm;
       color: $color-text-dark;
+      text-align: center;
     }
     .currencySelect {
-      font-weight: $font-weight-semibold;
+      font-weight: $font-weight-normal;
       font-size: $font-size-sm;
       color: $color-text-dark;
       border: none;
@@ -76,7 +75,7 @@
   display: flex;
   align-items: center;
   margin-left: $spacing-md;
-  gap: 0; // control spacing via divider margins
+  gap: 0;
 
   .valueWrapper {
     display: flex;
@@ -84,34 +83,39 @@
     align-items: flex-end;
     justify-content: center;
     padding-right: $spacing-md;
-    padding-top: $spacing-sm; // move vertical padding from .right into content
+    padding-top: $spacing-sm;
     padding-bottom: $spacing-sm;
     gap: $spacing-xs;
 
     .amount {
-      font-size: $font-size-sm;
-      font-weight: $font-weight-semibold;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-medium;
       color: $color-text-dark;
     }
 
     .rate {
-      font-size: $font-size-sm;
+      font-size: 0.75rem;
+      font-weight: $font-weight-medium;
       color: $color-text-gray;
+    }
+
+    .ratePlaceholder {
+      visibility: hidden;
     }
   }
 
   .divider {
     width: 1px;
     background-color: $color-border-gray;
-    align-self: stretch; // make the divider span the height of the flex line
-    opacity: 1; // always visible
+    align-self: stretch;
+    opacity: 1;
   }
 
   .editBtn {
     background: none;
     border: none;
     cursor: pointer;
-    padding: $spacing-md;
+    padding: $spacing-md $spacing-xs;
     display: flex;
     align-items: center;
     justify-content: center;

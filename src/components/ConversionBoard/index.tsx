@@ -68,24 +68,28 @@ export default function ConversionBoard({
   const formatCurrency = (value: number, currency: string) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: currency,
+      currency,
+      // Use narrowSymbol to avoid prefixes like "CA$" / "A$" and show "$" instead
+      currencyDisplay: "narrowSymbol",
     }).format(value);
   };
 
   return (
     <div className={styles.board}>
-      <CurrencyCard
-        country={isBaseCurrency}
-        amount={amount}
-        currencies={CURRENCIES}
-        isBase={true}
-        onCurrencyChange={setIsBaseCurrency}
-        onEditAmount={() => {
-          setEditing({ mode: "base", country: isBaseCurrency });
-          amountModal.open(String(amount));
-        }}
-        formatCurrency={formatCurrency}
-      />
+      <div className={styles.baseCard}>
+        <CurrencyCard
+          country={isBaseCurrency}
+          amount={amount}
+          currencies={CURRENCIES}
+          isBase={true}
+          onCurrencyChange={setIsBaseCurrency}
+          onEditAmount={() => {
+            setEditing({ mode: "base", country: isBaseCurrency });
+            amountModal.open(String(amount));
+          }}
+          formatCurrency={formatCurrency}
+        />
+      </div>
 
       <div className={styles.targetCards}>
         {loading ? (

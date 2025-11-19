@@ -10,7 +10,7 @@
   max-width: 28rem;
   margin: 0 auto;
   text-align: center;
-  font-size: $font-size-3xl;
-  font-weight: $font-weight-bold;
+  font-size: $font-size-2xl; // reduced from 3xl
+  font-weight: $font-weight-medium; // reduced from bold
   color: $color-text-dark;
 }

@@ -99,11 +99,11 @@ export function useLineChartInteraction({
 
   // After data window changes (zoom), recompute hover from last mouse px
   useEffect(() => {
-    if (!hover) return;
+    if (!lastMousePxRef.current) return; // only recompute if mouse was over chart
     const rect = containerRef.current?.getBoundingClientRect();
     if (!rect) return;
 
-    const px = lastMousePxRef.current || { x: hover.domX, y: hover.domY };
+    const px = lastMousePxRef.current;
     const pxX = px.x;
     const pxY = px.y;
 
@@ -137,7 +137,7 @@ export function useLineChartInteraction({
     const h: ChartHover = { vx, vy, domX: pxX, domY: pxY, date, rate };
     setHover(h);
     onHover?.({ x: vx, y: vy, date, rate, domX: pxX, domY: pxY });
-  }, [data, containerRef, hover, onHover, PLOT_WIDTH]);
+  }, [data, PLOT_WIDTH, onHover]);
 
   return {
     hover,

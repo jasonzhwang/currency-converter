@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component matches snapshot 1`] = `
+<div>
+  <button
+    aria-busy="false"
+    class="button primary md  "
+    type="button"
+  >
+    Snapshot
+  </button>
+</div>
+`;

@@ -3,12 +3,17 @@
 .board {
   display: flex;
   flex-direction: column;
-  gap: $spacing-lg;
-  max-width: 640px;
+  gap: 0;
+  max-width: 560px;
   width: 100%;
   margin: 0 auto;
   padding-left: $spacing-lg;
   padding-right: $spacing-lg;
+}
+
+.baseCard {
+  margin-top: $spacing-3xl;
+  margin-bottom: $spacing-3xl;
 }
 
 .targetCards {

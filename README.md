@@ -299,7 +299,7 @@ This project is open source and available under the [MIT License](LICENSE).
 ![input_validation](./public/references/input_validation.png)
 ![scrolling_chart1](./public/references/scrolling_chart1.png)
 ![scrolling_chart2](./public/references/scrolling_chart2.png)
-![design_system](./public/references/design_system.png)
+<img src="./public/references/design_system.png" alt="Design System" width="100%" />
 
 ---
 

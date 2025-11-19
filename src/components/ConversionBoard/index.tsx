@@ -10,6 +10,8 @@ import {
 import { fetchExchangeRates } from "@/services/exchangeRate";
 import { formatConversions } from "@/utils/conversionHelper";
 import { Conversion, ConversionBoardProps } from "@/types/conversion.types";
+import InputModal from "@/components/Modals/inputModal";
+import { useModal } from "@/hooks/useModal";
 
 export default function ConversionBoard({
   initialBaseCurrency = DEFAULT_CURRENCY,
@@ -19,6 +21,11 @@ export default function ConversionBoard({
   const [amount, setAmount] = useState(initialAmount);
   const [conversions, setConversions] = useState<Record<string, Conversion>>({});
   const [loading, setLoading] = useState(false);
+  const amountModal = useModal(String(initialAmount));
+  const [editing, setEditing] = useState<{
+    mode: "base" | "target";
+    country: string | null;
+  } | null>(null);
 
   useEffect(() => {
     const loadExchangeRates = async () => {
@@ -69,7 +76,10 @@ export default function ConversionBoard({
         currencies={CURRENCIES}
         isBase={true}
         onCurrencyChange={setIsBaseCurrency}
-        onEditAmount={() => console.log("Edit amount clicked")}
+        onEditAmount={() => {
+          setEditing({ mode: "base", country: isBaseCurrency });
+          amountModal.open(String(amount));
+        }}
         formatCurrency={formatCurrency}
       />
 
@@ -84,13 +94,46 @@ export default function ConversionBoard({
               baseCurrency={isBaseCurrency}
               conversion={conversion}
               isBase={false}
-              onEditAmount={() => console.log("Edit amount clicked")}
+              onEditAmount={() => {
+                setEditing({ mode: "target", country });
+                const prefill = conversion?.value != null ? String(conversion.value) : String("");
+                amountModal.open(prefill);
+              }}
               onViewChart={() => console.log("View chart clicked")}
               formatCurrency={formatCurrency}
             />
           ))
         )}
       </div>
+
+      {/* Input Modal */}
+      <InputModal
+        isOpen={amountModal.isOpen}
+        currency={editing?.mode === "target" && editing?.country ? editing.country : isBaseCurrency}
+        inputValue={amountModal.inputValue}
+        onInputChange={amountModal.setInputValue}
+        onCancel={() => {
+          amountModal.close();
+          setEditing(null);
+        }}
+        onConfirm={() => {
+          const sanitized = amountModal.inputValue.replace(/[^0-9.]/g, "");
+          const next = parseFloat(sanitized);
+          if (!isNaN(next)) {
+            if (editing?.mode === "target" && editing.country && conversions[editing.country]) {
+              const rate = conversions[editing.country].rate;
+              if (rate && rate > 0) {
+                const newBase = next / rate;
+                setAmount(newBase);
+              }
+            } else {
+              setAmount(next);
+            }
+          }
+          amountModal.close();
+          setEditing(null);
+        }}
+      />
     </div>
   );
 }

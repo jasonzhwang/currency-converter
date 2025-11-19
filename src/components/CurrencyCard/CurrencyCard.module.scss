@@ -13,11 +13,20 @@
       margin-bottom: $spacing-xl;
     }
   }
+
+  // Reveal edit button when hovering the entire card (desktop/tablet)
+  @include tablet-up {
+    &:hover {
+      .editBtn {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .content {
   display: flex;
-  align-items: center;
+  align-items: stretch; // stretch children so divider can take full height
   justify-content: space-between;
   gap: $spacing-lg;
 }
@@ -27,6 +36,8 @@
   align-items: center;
   gap: $spacing-md;
   flex: 1;
+  padding-top: $spacing-sm;
+  padding-bottom: $spacing-sm;
 
   .flag {
     flex-shrink: 0;
@@ -41,12 +52,10 @@
       font-size: $font-size-sm;
       color: $color-text-dark;
     }
-
     .currencySelect {
       font-weight: $font-weight-semibold;
       font-size: $font-size-sm;
       color: $color-text-dark;
-      background-color: transparent;
       border: none;
       outline: none;
       cursor: pointer;
@@ -67,6 +76,7 @@
   display: flex;
   align-items: center;
   margin-left: $spacing-md;
+  gap: 0; // control spacing via divider margins
 
   .valueWrapper {
     display: flex;
@@ -74,6 +84,8 @@
     align-items: flex-end;
     justify-content: center;
     padding-right: $spacing-md;
+    padding-top: $spacing-sm; // move vertical padding from .right into content
+    padding-bottom: $spacing-sm;
     gap: $spacing-xs;
 
     .amount {
@@ -88,10 +100,16 @@
     }
   }
 
+  .divider {
+    width: 1px;
+    background-color: $color-border-gray;
+    align-self: stretch; // make the divider span the height of the flex line
+    opacity: 1; // always visible
+  }
+
   .editBtn {
     background: none;
     border: none;
-    border-left: 1px solid $color-border-gray;
     cursor: pointer;
     padding: $spacing-md;
     display: flex;

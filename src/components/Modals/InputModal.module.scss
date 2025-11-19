@@ -1,0 +1,88 @@
+@import "../../styles/variables.scss";
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba($color-text-dark, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: $color-bg-white;
+  border: 1px solid $color-border-gray;
+  border-radius: $radius-md;
+  width: 100%;
+  max-width: 360px;
+  padding: $spacing-lg;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.modalTitle {
+  margin: 0 0 $spacing-md;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+}
+
+.modalInput {
+  width: 100%;
+  padding: $spacing-md $spacing-lg;
+  border: 1px solid $color-border-gray;
+  border-radius: $radius-md;
+  font-size: $font-size-base;
+  margin-bottom: $spacing-md;
+}
+
+.numberPad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-sm;
+  margin-bottom: $spacing-md;
+}
+
+.numberBtn,
+.decimalBtn,
+.deleteBtn {
+  padding: $spacing-md 0;
+  border: 1px solid $color-border-gray;
+  background: $color-bg-lighter;
+  border-radius: $radius-md;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: $spacing-sm;
+}
+
+.cancelBtn,
+.clearBtn,
+.confirmBtn {
+  padding: $spacing-md $spacing-lg;
+  border: 1px solid $color-border-gray;
+  border-radius: $radius-md;
+  background: $color-bg-white;
+  cursor: pointer;
+  font-weight: $font-weight-semibold;
+}
+
+.cancelBtn {
+  background: $color-bg-white;
+  color: $color-text-dark;
+}
+
+.confirmBtn {
+  background: $color-primary-blue;
+  color: $color-bg-white;
+  border-color: $color-primary-blue;
+}
+
+.clearBtn {
+  background: $color-error-light;
+  color: $color-error;
+  border-color: $color-error;
+}

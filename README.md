@@ -51,10 +51,12 @@ npm install
 Create a `.env.local` file in the root directory:
 
 ```env
-NEXT_PUBLIC_EXCHANGE_API_KEY=your_openexchangerates_api_key
+EXCHANGE_API_KEY=your_openexchangerates_api_key
 ```
 
 Get your API key from [OpenExchangeRates.org](https://openexchangerates.org/).
+
+**Security Note:** The `EXCHANGE_API_KEY` is stored only on the server side and never exposed to the client. All exchange rate requests go through our backend API route (`/api/exchange-rates`), keeping your API key secure.
 
 ### Development
 
@@ -329,7 +331,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 1. Push your code to GitHub
 2. Import your repository to Vercel
 3. Add environment variables in Vercel dashboard:
-   - `NEXT_PUBLIC_EXCHANGE_API_KEY`
+   - `EXCHANGE_API_KEY`
 4. Deploy!
 
 Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

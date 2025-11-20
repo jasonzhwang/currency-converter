@@ -1,15 +1,12 @@
-import { BASE_URL } from "@/data/constants";
 import type { ExchangeRateResponse } from "@/types/api.types";
-
-const API_KEY = process.env.NEXT_PUBLIC_EXCHANGE_API_KEY;
 
 export async function fetchExchangeRates(
   baseCurrency: string = "AUD"
 ): Promise<ExchangeRateResponse> {
-  const url = `${BASE_URL}/latest.json?app_id=${API_KEY}&base=${baseCurrency}`;
-
   try {
-    const res = await fetch(url);
+    // Call our own backend API route instead of the external API directly
+    // This keeps the API key safe on the server
+    const res = await fetch(`/api/exchange-rates?base=${baseCurrency}`);
     if (!res.ok) {
       throw new Error(`API error: ${res.statusText}`);
     }

@@ -23,6 +23,7 @@ describe("fetchExchangeRates", () => {
     expect(result.rates.USD).toBe(0.65);
     expect(result.rates.EUR).toBe(0.61);
     expect(result.base).toBe("AUD");
+    expect(global.fetch).toHaveBeenCalledWith("/api/exchange-rates?base=AUD");
   });
 
   test("fetches rates with custom base currency", async () => {
@@ -40,11 +41,11 @@ describe("fetchExchangeRates", () => {
 
     const result = await fetchExchangeRates("USD");
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringContaining("base=USD"));
+    expect(global.fetch).toHaveBeenCalledWith("/api/exchange-rates?base=USD");
     expect(result.base).toBe("USD");
   });
 
-  test("includes API key in URL", async () => {
+  test("calls backend API route instead of external API", async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: true,
@@ -58,7 +59,9 @@ describe("fetchExchangeRates", () => {
 
     await fetchExchangeRates("AUD");
 
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringContaining("app_id="));
+    const callUrl = (global.fetch as jest.Mock).mock.calls[0][0];
+    expect(callUrl).toContain("/api/exchange-rates");
+    expect(callUrl).not.toContain("openexchangerates.org");
   });
 
   test("throws error when API returns 401 Unauthorized", async () => {
@@ -159,21 +162,7 @@ describe("fetchExchangeRates", () => {
     const result = await fetchExchangeRates("AUD");
 
     expect(Object.keys(result.rates)).toEqual(["AUD", "USD", "EUR", "GBP", "CAD", "NZD"]);
-  });
-
-  test("constructs correct API URL", async () => {
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve({ rates: {}, base: "AUD" }),
-      } as Response)
-    );
-
-    await fetchExchangeRates("EUR");
-
-    const callUrl = (global.fetch as jest.Mock).mock.calls[0][0];
-    expect(callUrl).toMatch(/https:\/\/openexchangerates\.org\/api\/latest\.json/);
-    expect(callUrl).toContain("base=EUR");
+    expect(global.fetch).toHaveBeenCalledWith("/api/exchange-rates?base=AUD");
   });
 
   test("handles rate values with many decimal places", async () => {
